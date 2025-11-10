@@ -1,7 +1,7 @@
 # GenAI Deep Research API
 
 ## Description
-This project serves as the backend for an AGI Deep Research application, utilizing FastAPI for the API and Langchain/Langgraph for orchestrating research agents.
+This project serves as the backend for a GenAI Deep Research application, utilizing FastAPI for the API and Langchain/Langgraph for orchestrating research agents.
 
 ## Features
 -   **Modular Agent System**: Designed with various agents (Planner, Analyser, Reflector, Reporter, Search) for different research tasks.
@@ -18,14 +18,14 @@ To view the diagram:
 2. Render the diagram using the command: `plantuml Architecture.puml`
 3. Alternatively, use an online PlantUML viewer or a VSCode extension.
 
-![alt text](image-1.png)
+![alt text](image.png)
 
 ## Installation
 
 1.  **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/agi-deep-research-backend.git
-    cd agi-deep-research-backend
+    git clone https://github.com/faawx/genai-generic-research-api.git
+    cd genai-generic-research-api
     ```
 
 2.  **Create a virtual environment**:
