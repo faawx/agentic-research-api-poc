@@ -1,9 +1,9 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
-' C2 Model for AGI Deep Research Backend
+' C2 Model for GenAI Deep Research API
 
-System_Boundary(c1, "AGI Deep Research Backend") {
+System_Boundary(c1, "GenAI Deep Research API") {
 
     Container(api, "FastAPI Application", "Python, FastAPI", "Exposes RESTful API for research orchestration.")
     Container(langgraph, "Langgraph Orchestrator", "Python, Langgraph", "Manages the flow and interaction of research agents.")
