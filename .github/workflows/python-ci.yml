@@ -56,9 +56,13 @@ jobs:
       - name: Set up Trivy
         uses: aquasecurity/setup-trivy@v0.2.0 # This just installs the trivy binary
         
-      - name: Run Trivy filesystem scan
+      - name: List files for debugging
         run: |
-          trivy fs --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 .
+          ls -laR
+          
+      - name: Run Trivy repository scan
+        run: |
+          trivy repo --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 .
 
           
   # ===================================================================
