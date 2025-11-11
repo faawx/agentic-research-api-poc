@@ -46,26 +46,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Add Python so Trivy's pip scanner has the right environment
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11' 
       - name: Run Trivy scan on requirements.txt
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'             # Scan the filesystem
-          scan-ref: 'requirements.txt'
+          scan-ref: '.'
+          scanners: 'vuln'    # Only scan for vulnerabilities
           ignore-unfixed: true
           format: 'table'
           severity: 'HIGH,CRITICAL'   # Fail on High or Critical
-          exit-code: '1'              # Makes the job fail if vulns are found
-
-      - name: Run Trivy scan on requirements-dev.txt
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'fs'
-          scan-ref: 'requirements-dev.txt' 
-          ignore-unfixed: true
-          format: 'table'
-          severity: 'HIGH,CRITICAL'
-          exit-code: '1'
-    
+          exit-code: '1'              # Makes the job fail if vulns are found    
 
   # ===================================================================
   # JOB 2: Build and Test
