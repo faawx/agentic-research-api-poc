@@ -60,9 +60,11 @@ jobs:
         run: |
           ls -laR
       
-      - name: Include transitive dependencies
+      - name: Install dependencies and generate requirements.txt
+       #Generate requirements.txt with all (direct and transitive) dependencies
         run: |
-          pip freeze > requirements.txt ; cat requirements.txt
+          pip install -r requirements.in 
+          pip freeze > requirements.txt
           
       - name: Run Trivy repository scan
         run: |
