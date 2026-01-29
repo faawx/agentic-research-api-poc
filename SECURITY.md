@@ -1,4 +1,4 @@
-# Security Architecture: Deep Research Agent
+# Security Architecture & Controls [WIP]
 
 This document provides a comprehensive overview of the security posture for the Deep Research Agent. It is intended for security professionals, software engineers, and anyone interested in understanding the principles and practices that keep this application secure.
 
@@ -25,6 +25,7 @@ Our security philosophy is rooted in a **defense-in-depth** strategy. We assume 
     *   [Risk: Excessive Agency (LLM06)](#risk-excessive-agency-llm06)
     *   [Risk: Insecure Output Handling (LLM07)](#risk-insecure-output-handling-llm07)
     *   [Risk: Overreliance on Agent Output (LLM09)](#risk-overreliance-on-agent-output-llm09)
+*   [**Part 4: Roadmap & Future Security Controls [WIP]**](#part-4-roadmap--future-security-controls-wip)
 
 ---
 
@@ -371,3 +372,18 @@ This section details the runtime controls designed to protect the agent from mal
     *   *The New York Times, "Here’s What to Know About AI Hallucinations"*
     *   *The Associated Press, "Lawyer who used ChatGPT for research must pay sanction for fake citations"*
 </details>
+
+---
+
+## Part 4: Roadmap & Future Security Controls [WIP]
+
+As this project evolves from a Proof of Concept (POC) to a production-ready system, we are actively working on implementing the following security controls.
+
+### API Security
+*   **Authentication & Authorization:** Implementing robust API key management or OAuth2 flows to secure access to the FastAPI endpoints.
+*   **Granular Rate Limiting:** Moving beyond global concurrency limits to implement per-user or per-tenant rate limiting.
+
+### Software Provenance & Integrity
+*   **Software Bill of Materials (SBOM):** Automating the generation of SBOMs (e.g., using Syft) during the build process to provide a transparent inventory of all components.
+*   **Artifact Signing:** Implementing container image signing (e.g., using Cosign/Sigstore) to ensure that only trusted, verified images can be deployed.
+*   **SLSA Compliance:** Aiming for SLSA (Supply-chain Levels for Software Artifacts) Level 2 compliance to guarantee build integrity.

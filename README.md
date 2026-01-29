@@ -1,7 +1,9 @@
-# GenAI Deep Research API
+# Agentic Generic Research API [POC][WIP]
+
+> **Note:** This project is a work-in-progress (WIP) and serves as a Proof of Concept (POC) for an agentic research system, with a focus on security, safety and ethical controls.
 
 ## Description
-This project serves as the backend for a GenAI Deep Research application, utilizing FastAPI for the API and Langchain/Langgraph for orchestrating research agents.
+This project serves as the backend for a Agentic Generic Research application, utilizing FastAPI for the API and Langchain/Langgraph for orchestrating research agents.
 
 ## Features
 -   **Modular Agent System**: Designed with various agents (Planner, Analyser, Reflector, Reporter, Search) for different research tasks.
