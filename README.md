@@ -5,6 +5,19 @@
 ## Description
 This project serves as the backend for a Agentic Generic Research application, utilizing FastAPI for the API and Langchain/Langgraph for orchestrating research agents.
 
+## Table of Contents
+
+- [Features](#features)
+- [Architecture](#architecture)
+- [Ethical Charter](#ethical-charter)
+- [Security](#security)
+- [Installation](#installation)
+- [LangSmith Tracing (Optional)](#langsmith-tracing-optional)
+- [Usage](#usage)
+- [Running Locally with Docker](#running-locally-with-docker)
+- [Deployment](#deployment)
+- [Project Structure](#project-structure)
+
 ## Features
 -   **Modular Agent System**: Designed with various agents (Planner, Analyser, Reflector, Reporter, Search) for different research tasks.
 -   **Google Search Integration**: Leverages Google Search for information retrieval.
@@ -22,6 +35,34 @@ To view the diagram:
 3. Alternatively, use an online PlantUML viewer or a VSCode extension.
 
 ![alt text](image.png)
+
+## Ethical Charter
+
+The agent is designed with a strong ethical framework, detailed in the [ETHICS.md](./ETHICS.md) file. This charter is technically enforced through a `SAFETY_CONSTITUTION` implemented in the agent's logic.
+
+Core principles include:
+- **Harmlessness:** Refusing to research dangerous or illegal topics.
+- **Privacy:** Redacting Personally Identifiable Information (PII).
+- **Objectivity:** Grounding answers in verifiable search results.
+- **Robustness:** Limiting agent capabilities to prevent misuse.
+
+## Security
+
+This project implements a multi-layered security approach to mitigate risks.
+The full security policy, which details runtime defenses and secure development practices, can be found in [SECURITY.md](./SECURITY.md).
+
+### Key Security Measures
+
+-   **Prompt Injection Defense:** All user inputs are validated and checked for malicious intent before being processed by the core agents. Hardened system prompts provide an additional layer of defense.
+-   **Sensitive Information Redaction:** The agent automatically sanitizes outputs to find and redact Personally Identifiable Information (PII) like emails and phone numbers.
+-   **Denial of Service Prevention:** The application enforces strict limits on input length and the number of research iterations to prevent resource exhaustion.
+-   **Restricted Agency & Tooling:** The agent's capabilities are intentionally limited. Its only tool is a read-only Google Search, with no access to the file system, network, or code execution.
+-   **Secure Development Lifecycle (CI/CD):** The CI/CD pipeline, defined in `.github/workflows/python-ci.yml`, automates security at every stage:
+    -   **Secret Scanning (`gitleaks`):** Prevents API keys and other secrets from being committed.
+    -   **Static Analysis (SAST with `Bandit`):** Scans Python code for common vulnerabilities.
+    -   **Dependency Scanning (SCA with `Trivy`):** Checks third-party libraries for known CVEs.
+-   **Container Scanning:** The container image is scanned for known vulnerabilities before being deployed, ensuring the runtime environment is secure.
+-   **Secure Deployment:** The application is containerized and deployed on Google Cloud Run, following infrastructure-as-code and least-privilege principles. Secrets are securely managed using Google Secret Manager and injected at runtime.
 
 ## Installation
 
@@ -170,34 +211,6 @@ To start a new build and deploy the application, run:
 ```bash
 gcloud builds submit
 ```
-
-## Security
-
-This project implements a multi-layered security approach to mitigate risks.
-The full security policy, which details runtime defenses and secure development practices, can be found in [SECURITY.md](./SECURITY.md).
-
-### Key Security Measures
-
--   **Prompt Injection Defense:** All user inputs are validated and checked for malicious intent before being processed by the core agents. Hardened system prompts provide an additional layer of defense.
--   **Sensitive Information Redaction:** The agent automatically sanitizes outputs to find and redact Personally Identifiable Information (PII) like emails and phone numbers.
--   **Denial of Service Prevention:** The application enforces strict limits on input length and the number of research iterations to prevent resource exhaustion.
--   **Restricted Agency & Tooling:** The agent's capabilities are intentionally limited. Its only tool is a read-only Google Search, with no access to the file system, network, or code execution.
--   **Secure Development Lifecycle (CI/CD):** The CI/CD pipeline, defined in `.github/workflows/python-ci.yml`, automates security at every stage:
-    -   **Secret Scanning (`gitleaks`):** Prevents API keys and other secrets from being committed.
-    -   **Static Analysis (SAST with `Bandit`):** Scans Python code for common vulnerabilities.
-    -   **Dependency Scanning (SCA with `Trivy`):** Checks third-party libraries for known CVEs.
--   **Container Scanning:** The container image is scanned for known vulnerabilities before being deployed, ensuring the runtime environment is secure.
--   **Secure Deployment:** The application is containerized and deployed on Google Cloud Run, following infrastructure-as-code and least-privilege principles. Secrets are securely managed using Google Secret Manager and injected at runtime.
-
-## Ethical Charter
-
-The agent is designed with a strong ethical framework, detailed in the [ETHICS.md](./ETHICS.md) file. This charter is technically enforced through a `SAFETY_CONSTITUTION` implemented in the agent's logic.
-
-Core principles include:
-- **Harmlessness:** Refusing to research dangerous or illegal topics.
-- **Privacy:** Redacting Personally Identifiable Information (PII).
-- **Objectivity:** Grounding answers in verifiable search results.
-- **Robustness:** Limiting agent capabilities to prevent misuse.
 
 ## Project Structure
 
